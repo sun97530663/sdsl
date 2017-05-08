@@ -25,5 +25,7 @@ int main(int argc, char *argv[])
 
     MTreeWidget * uMTreeWidget = new MTreeWidget;
     uMTreeWidget->show();
+
+
     return a.exec();
 }
