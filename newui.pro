@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     modifytext.cpp \
-    msplashscreen.cpp
+    msplashscreen.cpp \
+    mtreewidget.cpp
 
 HEADERS  += mainwindow.h \
     struct.h \
     modifytext.h \
-    msplashscreen.h
+    msplashscreen.h \
+    mtreewidget.h
 
 FORMS    += mainwindow.ui \
     modifytext.ui

@@ -4,6 +4,9 @@
 #include <QPixmap>
 #include <QTimer>
 #include "msplashscreen.h"
+
+#include "mtreewidget.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -19,5 +22,8 @@ int main(int argc, char *argv[])
     QTimer::singleShot(3500, &w, SLOT(show()));
 
 
+
+    MTreeWidget * uMTreeWidget = new MTreeWidget;
+    uMTreeWidget->show();
     return a.exec();
 }

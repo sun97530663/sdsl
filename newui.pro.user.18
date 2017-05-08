@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.6.1, 2017-05-08T13:40:03. -->
+<!-- Written by QtCreator 3.6.1, 2017-05-05T23:56:49. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{061d8548-39ad-457b-adb8-dce13fc85af9}</value>
+  <value type="QByteArray">{ac53bce8-3824-44e0-a84f-9e017f0aa1f0}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -260,7 +260,7 @@
     <valuelist type="QVariantList" key="Analyzer.Valgrind.RemovedSuppressionFiles"/>
     <value type="int" key="Analyzer.Valgrind.SelfModifyingCodeDetection">1</value>
     <value type="bool" key="Analyzer.Valgrind.Settings.UseGlobalSettings">true</value>
-    <value type="bool" key="Analyzer.Valgrind.ShowReachable">true</value>
+    <value type="bool" key="Analyzer.Valgrind.ShowReachable">false</value>
     <value type="bool" key="Analyzer.Valgrind.TrackOrigins">true</value>
     <value type="QString" key="Analyzer.Valgrind.ValgrindExecutable">valgrind</value>
     <valuelist type="QVariantList" key="Analyzer.Valgrind.VisibleErrorKinds">
@@ -283,8 +283,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">newui</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">newui2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:F:/newui/newui.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Qt/work/newui/newui.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">newui.pro</value>
