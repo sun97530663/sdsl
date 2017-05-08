@@ -23,8 +23,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //设置分割窗口比例
-    ui->splitter_2->setStretchFactor(1, 1);
-    ui->splitter_4->setStretchFactor(1, 1);
+    ui->mainsplitter->setStretchFactor(1, 1);
+    //ui->splitter_4->setStretchFactor(1, 1);
 
 }
 

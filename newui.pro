@@ -25,7 +25,8 @@ HEADERS  += mainwindow.h \
     mtreewidget.h
 
 FORMS    += mainwindow.ui \
-    modifytext.ui
+    modifytext.ui \
+    dialog.ui
 
 RESOURCES += \
     rc.qrc
