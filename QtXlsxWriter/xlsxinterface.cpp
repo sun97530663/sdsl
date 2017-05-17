@@ -250,7 +250,7 @@ void XlsxInterface::OpenXlsx()
     foreach (QString sheetName, xlsx.sheetNames()) {
         Worksheet *sheet = dynamic_cast<Worksheet *>(xlsx.sheet(sheetName));
         if (sheet) {
-            QTableView *view = new QTableView();
+           // QTableView *view = new QTableView();
 
 //           // connect(view,SIGNAL())
 //            view->setModel(new SheetModel(sheet, view));

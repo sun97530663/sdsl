@@ -23,8 +23,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //设置分割窗口比例
-    ui->mainsplitter->setStretchFactor(1, 1);
-    //ui->splitter_4->setStretchFactor(1, 1);
+
+    ui->splitter->setStretchFactor(1, 1);
+    ui->splitter_2->setStretchFactor(0, 1);
+    ui->splitter_3->setStretchFactor(1, 1);
+
+    ui->splitter_4->setStretchFactor(0,3);
+    ui->splitter_4->setStretchFactor(1,2);
+
+
+    ui->tableWidgetChangeDE->hide();
+    ui->widgetback4->hide();
 
 }
 
@@ -35,5 +44,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::open(){
 
+
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->tableWidgetChangeDE->show();
+    ui->widgetback4->show();
 
 }
