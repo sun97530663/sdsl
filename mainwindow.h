@@ -30,6 +30,9 @@ public:
 public
     slots:
     void open();
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

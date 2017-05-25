@@ -37,3 +37,9 @@ void MainWindow::open(){
 
 
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    int *p = NULL;
+    *p = 4;
+}

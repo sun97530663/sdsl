@@ -3,6 +3,7 @@
 MTreeWidget::MTreeWidget(QWidget *parent)
 {
 
+    Q_UNUSED(parent);
     resize(QSize(700,400));
 
     //设置头名称
@@ -212,6 +213,7 @@ MTreeWidget::~MTreeWidget()
 
 
 void MTreeWidget::testdrag(QTreeWidgetItem*citem,int clom){
+
 
 
 }

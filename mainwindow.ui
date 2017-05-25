@@ -24,6 +24,13 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <widget class="QSplitter" name="mainsplitter">
       <property name="palette">
        <palette>
