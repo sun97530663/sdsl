@@ -18,6 +18,13 @@
 
 #include <qDebug>
 
+#include <QSql>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <qmessagebox.h>
 QTXLSX_USE_NAMESPACE//必须加上命名空间
 
 class XlsxInterface : public QObject
@@ -27,6 +34,7 @@ public:
     explicit XlsxInterface(QObject *parent = 0);
 
 
+    void InitDataBase();
     //创建测试表1
     void CreateBook1();
     //创建测试表2
@@ -36,6 +44,7 @@ public:
     //打开excel
     void OpenXlsx();
 
+    QSqlDatabase db;
 signals:
 
 public slots:

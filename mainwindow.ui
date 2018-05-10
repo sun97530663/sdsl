@@ -499,13 +499,24 @@ border:1px solid gray;
           </property>
           <item>
            <widget class="QPushButton" name="pushButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>微软雅黑</family>
+             </font>
+            </property>
             <property name="text">
-             <string>PushButton</string>
+             <string>项目-清单-单价</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QTabWidget" name="tabWidget_3">
+           <widget class="QTabWidget" name="tabWidgetMainTreeWidget">
             <property name="font">
              <font>
               <family>微软雅黑</family>
@@ -534,15 +545,6 @@ border:1px solid gray;
               <property name="bottomMargin">
                <number>0</number>
               </property>
-              <item>
-               <widget class="QTreeWidget" name="treeWidget">
-                <column>
-                 <property name="text">
-                  <string notr="true">1</string>
-                 </property>
-                </column>
-               </widget>
-              </item>
              </layout>
             </widget>
            </widget>

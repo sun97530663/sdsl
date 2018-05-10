@@ -1,8 +1,8 @@
-#include "xlsxinterface.h"
+﻿#include "xlsxinterface.h"
 
 XlsxInterface::XlsxInterface(QObject *parent) : QObject(parent)
 {
-
+    InitDataBase();
 }
 
 //创建测试表1
@@ -245,7 +245,7 @@ void XlsxInterface::OpenXlsx()
     QString filePath = QFileDialog::getOpenFileName(0, "Open xlsx file", QString(), "*.xlsx");
     if (filePath.isEmpty())
         return;
-
+    QSqlQuery query(db);
     Document xlsx(filePath);
     foreach (QString sheetName, xlsx.sheetNames()) {
         Worksheet *sheet = dynamic_cast<Worksheet *>(xlsx.sheet(sheetName));
@@ -268,31 +268,239 @@ void XlsxInterface::OpenXlsx()
 
 
              qDebug()<<row<<clom<<sheetName<<endl;
-            for (int i=0; i<=row; i++) {
+            for (int i=1; i<=row; i++) {
 
-                for(int j= 0;j<=clom;j++){
+
+                if(i==1)
+                {
+                    continue;
+                }
+                QStringList list;
+                list.clear();
+                for(int j= 1;j<=clom;j++){
+
 
                     if (QXlsx::Cell *cell=sheet->cellAt(i, j))
                     {
-
+                        //如果单元格内有数据
                         if(cell->value().type()==QMetaType::UnknownType)
                         {
 
                             //未知类型
+
                         }
                         else
                         {
 
-                            qDebug()<<i<<j<<cell->value()<<cell->cellType()<<cell->format();
+                            qDebug()<<i<<j<<cell->value();
+                            list.append(cell->value().toString());
+                            //qDebug()<<i<<j<<cell->value()<<cell->cellType()<<cell->format();
                         }
 
                     }
+                    else
+                    {
+                        //单元格内无数据，为空
+                         list.append("");
+                    }
 
                 }
+
+                // 添
+                bool ret = false;
+                QString sqlLine = QString("insert into NongYeDingE(id,\
+                                          model,\
+                                          dingeno,\
+                                          biaoshi,\
+                                          mingcheng,\
+                                          danwei,\
+                                          dingeliang,\
+                                          danweizhi,\
+                                          danweiming,\
+                                          jixiebianhao,\
+                                          ercixuanze,\
+                                          demingcheng,\
+                                          shuoming1,\
+                                          shuoming2,\
+                                          shuoming3,\
+                                          shiyongfanwei,\
+                                          gongzuoneirong,\
+                                          danjia,\
+                                          xianjia,\
+                                          jiacha,\
+                                          weijijia,\
+                                          heji,\
+                                          zhushi) values (%1,'%2',%3,'%4','%5','%6',%7,%8,'%9',%10,\
+                                          %11,'%12','%13','%14','%15','%16','%17',%18,%19,%20,%21,%22,'%23')")\
+                        .arg(list.at(0).toInt())\
+                        .arg(list.at(1))\
+                        .arg(list.at(2).toInt())\
+                        .arg(list.at(3))\
+                        .arg(list.at(4))\
+                        .arg(list.at(5))\
+                        .arg(list.at(6).toDouble())\
+                        .arg(list.at(7).toInt())\
+                        .arg(list.at(8))\
+                        .arg(list.at(9).toInt())\
+                        .arg(list.at(10).toInt())\
+                        .arg(list.at(11))\
+                        .arg(list.at(12))\
+                        .arg(list.at(13))\
+                        .arg(list.at(14))\
+                        .arg(list.at(15))\
+                        .arg(list.at(16))\
+                        .arg(list.at(17).toDouble())\
+                        .arg(list.at(18).toDouble())\
+                        .arg(list.at(19).toDouble())\
+                        .arg(list.at(20).toDouble())\
+                        .arg(list.at(21).toDouble())\
+                        .arg(list.at(22));
+
+                ret = query.exec(sqlLine);
+
 
             }
 
         }
     }
+
+}
+void XlsxInterface::InitDataBase()
+{
+    // 数据记录
+    QString FilePathName = "C:/DataBase.db";
+    db = QSqlDatabase::addDatabase("QSQLITE","DataBase");
+    db.setDatabaseName(FilePathName);
+    if (db.open())
+    {
+        QSqlQuery query(db);
+
+        //创建农业定额表
+        QString sqlLine = QString("select * from NongYeDingE");
+        bool isTableExist = query.exec(sqlLine);    //关键的判断
+        if(!isTableExist)
+        {
+            //如果不存在对应的表，则创建
+
+            query.exec("begin");
+            query.exec("create table NongYeDingE( "
+                       "id             INTEGER PRIMARY KEY,\
+                       model          VARCHAR,\
+                       dingeno        INTEGER,\
+                       biaoshi        VARCHAR,\
+                       mingcheng      VARCHAR,\
+                       danwei         VARCHAR,\
+                       dingeliang     DOUBLE,\
+                       danweizhi      INTEGER,\
+                       danweiming     VARCHAR,\
+                       jixiebianhao   INTEGER,\
+                       ercixuanze     INTEGER,\
+                       demingcheng    VARCHAR,\
+                       shuoming1      VARCHAR,\
+                       shuoming2      VARCHAR,\
+                       shuoming3      VARCHAR,\
+                       shiyongfanwei  VARCHAR,\
+                       gongzuoneirong VARCHAR,\
+                       danjia         DOUBLE,\
+                       xianjia        DOUBLE,\
+                       jiacha         DOUBLE,\
+                       weijijia       DOUBLE,\
+                       heji           DOUBLE,\
+                       zhushi         VARCHAR)");
+                    query.exec("commit");
+            //返回空表
+        }
+        else
+        {
+            //对应表已经存在
+        }
+        //创建水利定额表
+        sqlLine = QString("select * from ShuiLiDingE");
+        isTableExist = query.exec(sqlLine);    //关键的判断
+        if(!isTableExist)
+        {
+            //如果不存在对应的表，则创建
+
+            query.exec("begin");
+            query.exec("create table ShuiLiDingE( "
+                       "id             INTEGER PRIMARY KEY,\
+                       model          VARCHAR,\
+                       dingeno        INTEGER,\
+                       biaoshi        VARCHAR,\
+                       mingcheng      VARCHAR,\
+                       danwei         VARCHAR,\
+                       dingeliang     DOUBLE,\
+                       danweizhi      INTEGER,\
+                       danweiming     VARCHAR,\
+                       jixiebianhao   INTEGER,\
+                       ercixuanze     INTEGER,\
+                       demingcheng    VARCHAR,\
+                       shuoming1      VARCHAR,\
+                       shuoming2      VARCHAR,\
+                       shuoming3      VARCHAR,\
+                       shiyongfanwei  VARCHAR,\
+                       gongzuoneirong VARCHAR,\
+                       danjia         DOUBLE,\
+                       xianjia        DOUBLE,\
+                       jiacha         DOUBLE,\
+                       weijijia       DOUBLE,\
+                       heji           DOUBLE,\
+                       zhushi         VARCHAR)");
+                    query.exec("commit");
+            //返回空表
+        }
+        else
+        {
+            //对应表已经存在
+        }
+        //创建土地定额表
+        sqlLine = QString("select * from TuDiDingE");
+        isTableExist = query.exec(sqlLine);    //关键的判断
+        if(!isTableExist)
+        {
+            //如果不存在对应的表，则创建
+
+            query.exec("begin");
+            query.exec("create table TuDiDingE( "
+                       "id             INTEGER PRIMARY KEY,\
+                       model          VARCHAR,\
+                       dingeno        INTEGER,\
+                       biaoshi        VARCHAR,\
+                       mingcheng      VARCHAR,\
+                       danwei         VARCHAR,\
+                       dingeliang     DOUBLE,\
+                       danweizhi      INTEGER,\
+                       danweiming     VARCHAR,\
+                       jixiebianhao   INTEGER,\
+                       ercixuanze     INTEGER,\
+                       demingcheng    VARCHAR,\
+                       shuoming1      VARCHAR,\
+                       shuoming2      VARCHAR,\
+                       shuoming3      VARCHAR,\
+                       shiyongfanwei  VARCHAR,\
+                       gongzuoneirong VARCHAR,\
+                       danjia         DOUBLE,\
+                       xianjia        DOUBLE,\
+                       jiacha         DOUBLE,\
+                       weijijia       DOUBLE,\
+                       heji           DOUBLE,\
+                       zhushi         VARCHAR)");
+                    query.exec("commit");
+            //返回空表
+        }
+        else
+        {
+            //对应表已经存在
+        }
+    }
+    else
+    {
+
+        QSqlError err = db.lastError();
+
+        QMessageBox::about(nullptr, "error", QString("type %1 \n database %2 \n driver %3").arg((int)err.type()).arg(err.databaseText()).arg(err.driverText()));
+
+    }
+
 
 }
