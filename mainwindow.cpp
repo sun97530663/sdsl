@@ -88,11 +88,29 @@ void MainWindow::InitMenu()
     QMenu *HelpActionMenu = ui->menuBar->addMenu(tr("&帮助"));
 
 
+
+    ui->menuBar->addAction(QString("返回"), this, SLOT(onBackStart()));
+
+
 }
 //初始化各个子界面
 void MainWindow::InitSubUI()
 {
 
+
+    //初始化项目总览表
+    ui->tableWidgetProjectAll->setColumnCount(3); //设置列数为3
+    QStringList header;
+    header<<"序号"<<"项目名称"<<"项目金额";
+    ui->tableWidgetProjectAll->setHorizontalHeaderLabels(header);
+    ui->tableWidgetProjectAll->horizontalHeader()->setStretchLastSection(true); //就是这个地方
+
+    ui->tableWidgetProjectAll->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    //隐藏行号
+    QHeaderView *headerView = ui->tableWidgetProjectAll->verticalHeader();
+    headerView->setHidden(true);
+    ui->tableWidgetProjectAll->setColumnWidth(0,50);
 
     uMaterialPriceSet = new MaterialPriceSet(this);
     uMaterialPriceSet->hide();
@@ -104,10 +122,16 @@ void MainWindow::InitSubUI()
     oAbout->hide();
 
 
+    //创建编辑树
     uMTreeWidget = new MTreeWidget();
+    //连接更新项目总览的槽函数
+    connect(uMTreeWidget,SIGNAL(UpdateAllTopNode(QStringList ,QStringList ,QStringList )),this,SLOT(UpdateProjectAll(QStringList ,QStringList ,QStringList )));
 
+    //统计所有根节点
+    uMTreeWidget->CountAllTopNode();
     ui->tabWidgetMainTreeWidget->clear();
     ui->tabWidgetMainTreeWidget->addTab(uMTreeWidget,"工程项目");
+
 
 }
 
@@ -163,4 +187,34 @@ void MainWindow::on_pushButton_clicked()
         ui->widgetback4->hide();
         isshow = true;
     }
+}
+//返回起始界面
+void MainWindow::onBackStart()
+{
+    this->hide();
+    emit backstart();
+}
+
+//更新项目总览表
+void MainWindow::UpdateProjectAll(QStringList projectindex,QStringList projectname,QStringList projectsum)
+{
+
+    //ui->tableWidgetProjectAll->clear();
+    for(int i=0;i<projectindex.size();i++)
+    {
+
+        ui->tableWidgetProjectAll->insertRow(i);
+
+        //序号
+
+        ui->tableWidgetProjectAll->setItem(i,0,new QTableWidgetItem (projectindex.at(i)));
+        //名称
+
+        ui->tableWidgetProjectAll->setItem(i,1,new QTableWidgetItem (projectname.at(i)));
+        //金额
+
+        ui->tableWidgetProjectAll->setItem(i,2,new QTableWidgetItem (projectsum.at(i)));
+
+    }
+
 }

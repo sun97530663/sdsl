@@ -26,7 +26,7 @@
   <widget class="QPushButton" name="pushButtonExport">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>150</x>
      <y>520</y>
      <width>80</width>
      <height>30</height>
@@ -56,7 +56,7 @@
   <widget class="QPushButton" name="pushButtonOpen">
    <property name="geometry">
     <rect>
-     <x>280</x>
+     <x>260</x>
      <y>520</y>
      <width>80</width>
      <height>30</height>
@@ -74,8 +74,13 @@
      <height>30</height>
     </size>
    </property>
+   <property name="font">
+    <font>
+     <family>微软雅黑</family>
+    </font>
+   </property>
    <property name="text">
-    <string>打开</string>
+    <string>导入</string>
    </property>
   </widget>
  </widget>

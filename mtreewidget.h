@@ -40,6 +40,9 @@ public:
     QList<QTreeWidgetItem*> RbuildTree(QList<QTreeWidgetItem*> selectedItemList);
 
     void SelfBuild(QTreeWidgetItem *item,QList<QTreeWidgetItem*> ItemList,QTreeWidgetItem *newitem = NULL);
+
+    //统计所有根节点
+    void CountAllTopNode();
 private slots:
     //增加子项
     void on_add_clicked();
@@ -72,6 +75,9 @@ private slots:
 
     void on_pushButtonbrother_clicked();
 
+signals:
+    //更新顶点信息，给项目总览显示 参数：序号、名称、金额
+    void UpdateAllTopNode(QStringList projectindex,QStringList projectname,QStringList projectsum);
 
 private:
 

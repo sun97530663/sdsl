@@ -44,6 +44,11 @@ public:
     //打开excel
     void OpenXlsx();
 
+    void OpenNongyeXlsx();
+    void OpenShuiLiXlsx();
+    void OpenTuDiXlsx();
+
+
     QSqlDatabase db;
 signals:
 

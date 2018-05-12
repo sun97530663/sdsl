@@ -35,5 +35,9 @@ void ReportOutput::on_pushButtonExport_clicked()
 
 void ReportOutput::on_pushButtonOpen_clicked()
 {
-    interface.OpenXlsx();
+    //interface.OpenXlsx();
+
+    interface.OpenNongyeXlsx();
+    interface.OpenShuiLiXlsx();
+    interface.OpenTuDiXlsx();
 }

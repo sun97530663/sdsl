@@ -204,6 +204,8 @@ MTreeWidget::MTreeWidget(QWidget *parent)
     connect(uModifyText,SIGNAL(SignalModifyText(QString )),this,SLOT(SlotModifyText(QString )));
 
 
+
+
 }
 MTreeWidget::~MTreeWidget()
 {
@@ -918,4 +920,33 @@ void MTreeWidget::on_mod_clicked()
 
     uModifyText->show();
 
+}
+//统计所有根节点
+void MTreeWidget::CountAllTopNode()
+{
+
+
+    int topCount = topLevelItemCount();
+
+    QStringList listindex;
+    listindex.clear();
+    QStringList listname;
+    listname.clear();
+    QStringList listsum;
+    listsum.clear();
+
+    for(int i=0;i<topCount;i++)
+    {
+
+        QTreeWidgetItem *item = topLevelItem(i);
+
+        QString projectindex = item->text(0);//项目序号
+        QString projectname= item->text(1);//项目名称
+        QString projectsum= item->text(2);//项目名称
+        listindex.append(projectindex);
+        listname.append(projectname);
+        listsum.append(projectsum);
+    }
+
+    emit UpdateAllTopNode(listindex,listname,listsum);
 }

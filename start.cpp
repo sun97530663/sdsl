@@ -9,6 +9,7 @@ Start::Start(QWidget *parent) :
 
     uiMainWindow = new MainWindow();
     uiMainWindow->hide();
+    connect(uiMainWindow,SIGNAL(backstart()),this,SLOT(show()));
 }
 
 Start::~Start()

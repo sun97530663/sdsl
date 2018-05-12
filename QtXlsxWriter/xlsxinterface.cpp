@@ -266,6 +266,62 @@ void XlsxInterface::OpenXlsx()
             int row = range.rowCount();//行
             int clom = range.columnCount();//列
 
+            qDebug()<<row<<clom<<sheetName<<endl;
+            for (int i=1; i<=row; i++) {
+                QStringList list;
+                list.clear();
+                for(int j= 1;j<=clom;j++){
+
+
+                    if (QXlsx::Cell *cell=sheet->cellAt(i, j))
+                    {
+                        //如果单元格内有数据
+                        if(cell->value().type()==QMetaType::UnknownType)
+                        {
+
+                            //未知类型
+
+                        }
+                        else
+                        {
+
+                            qDebug()<<i<<j<<cell->value();
+                            //qDebug()<<i<<j<<cell->value()<<cell->cellType()<<cell->format();
+                        }
+
+                    }
+                    else
+                    {
+                        //单元格内无数据，为空
+
+                    }
+
+                }
+
+            }
+
+        }
+    }
+
+}
+//农业
+void XlsxInterface::OpenNongyeXlsx()
+{
+    QString filePath = "./BaseData农业定额.xlsx";
+    if (filePath.isEmpty())
+        return;
+    QSqlQuery query(db);
+    Document xlsx(filePath);
+    foreach (QString sheetName, xlsx.sheetNames()) {
+        Worksheet *sheet = dynamic_cast<Worksheet *>(xlsx.sheet(sheetName));
+        if (sheet) {
+
+            QXlsx::CellRange range;
+            range = sheet->dimension();
+
+            int row = range.rowCount();//行
+            int clom = range.columnCount();//列
+
 
              qDebug()<<row<<clom<<sheetName<<endl;
             for (int i=1; i<=row; i++) {
@@ -308,54 +364,216 @@ void XlsxInterface::OpenXlsx()
 
                 // 添
                 bool ret = false;
-                QString sqlLine = QString("insert into NongYeDingE(id,\
-                                          model,\
-                                          dingeno,\
-                                          biaoshi,\
-                                          mingcheng,\
-                                          danwei,\
-                                          dingeliang,\
-                                          danweizhi,\
-                                          danweiming,\
-                                          jixiebianhao,\
-                                          ercixuanze,\
-                                          demingcheng,\
-                                          shuoming1,\
-                                          shuoming2,\
-                                          shuoming3,\
-                                          shiyongfanwei,\
-                                          gongzuoneirong,\
-                                          danjia,\
-                                          xianjia,\
-                                          jiacha,\
-                                          weijijia,\
-                                          heji,\
-                                          zhushi) values (%1,'%2',%3,'%4','%5','%6',%7,%8,'%9',%10,\
-                                          %11,'%12','%13','%14','%15','%16','%17',%18,%19,%20,%21,%22,'%23')")\
-                        .arg(list.at(0).toInt())\
-                        .arg(list.at(1))\
-                        .arg(list.at(2).toInt())\
-                        .arg(list.at(3))\
-                        .arg(list.at(4))\
-                        .arg(list.at(5))\
-                        .arg(list.at(6).toDouble())\
-                        .arg(list.at(7).toInt())\
-                        .arg(list.at(8))\
-                        .arg(list.at(9).toInt())\
-                        .arg(list.at(10).toInt())\
-                        .arg(list.at(11))\
-                        .arg(list.at(12))\
-                        .arg(list.at(13))\
-                        .arg(list.at(14))\
-                        .arg(list.at(15))\
-                        .arg(list.at(16))\
-                        .arg(list.at(17).toDouble())\
-                        .arg(list.at(18).toDouble())\
-                        .arg(list.at(19).toDouble())\
-                        .arg(list.at(20).toDouble())\
-                        .arg(list.at(21).toDouble())\
+                QString sqlLine = QString("insert into NongYeDingE(id,model,dingeno,biaoshi,mingcheng,danwei,dingeliang,danweizhi,danweiming,jixiebianhao,ercixuanze,\demingcheng,shuoming1,shuoming2,shuoming3,shiyongfanwei,gongzuoneirong,danjia,xianjia,jiacha,weijijia,heji,zhushi) values (%1,'%2',%3,'%4','%5','%6',%7,%8,'%9',%10,%11,'%12','%13','%14','%15','%16','%17',%18,%19,%20,%21,%22,'%23')")
+                        .arg(list.at(0).toInt())
+                        .arg(list.at(1))
+                        .arg(list.at(2).toInt())
+                        .arg(list.at(3))
+                        .arg(list.at(4))
+                        .arg(list.at(5))
+                        .arg(list.at(6).toDouble())
+                        .arg(list.at(7).toInt())
+                        .arg(list.at(8))
+                        .arg(list.at(9).toInt())
+                        .arg(list.at(10).toInt())
+                        .arg(list.at(11))
+                        .arg(list.at(12))
+                        .arg(list.at(13))
+                        .arg(list.at(14))
+                        .arg(list.at(15))
+                        .arg(list.at(16))
+                        .arg(list.at(17).toDouble())
+                        .arg(list.at(18).toDouble())
+                        .arg(list.at(19).toDouble())
+                        .arg(list.at(20).toDouble())
+                        .arg(list.at(21).toDouble())
                         .arg(list.at(22));
 
+                ret = query.exec(sqlLine);
+
+
+            }
+
+        }
+    }
+
+}
+//水利转换
+void XlsxInterface::OpenShuiLiXlsx()
+{
+    QString filePath = "./BaseData水利定额.xlsx";
+    if (filePath.isEmpty())
+        return;
+    QSqlQuery query(db);
+    Document xlsx(filePath);
+    foreach (QString sheetName, xlsx.sheetNames()) {
+        Worksheet *sheet = dynamic_cast<Worksheet *>(xlsx.sheet(sheetName));
+        if (sheet) {
+
+            QXlsx::CellRange range;
+            range = sheet->dimension();
+
+            int row = range.rowCount();//行
+            int clom = range.columnCount();//列
+
+
+             qDebug()<<row<<clom<<sheetName<<endl;
+            for (int i=1; i<=row; i++) {
+
+
+                if(i==1)
+                {
+                    continue;
+                }
+                QStringList list;
+                list.clear();
+                for(int j= 1;j<=clom;j++){
+
+
+                    if (QXlsx::Cell *cell=sheet->cellAt(i, j))
+                    {
+                        //如果单元格内有数据
+                        if(cell->value().type()==QMetaType::UnknownType)
+                        {
+
+                            //未知类型
+
+                        }
+                        else
+                        {
+
+                            qDebug()<<i<<j<<cell->value();
+                            list.append(cell->value().toString());
+                            //qDebug()<<i<<j<<cell->value()<<cell->cellType()<<cell->format();
+                        }
+
+                    }
+                    else
+                    {
+                        //单元格内无数据，为空
+                         list.append("");
+                    }
+
+                }
+
+                // 添
+                bool ret = false;
+                QString sqlLine = QString("insert into ShuiLiDingE(id,model,dingeno,biaoshi,mingcheng,danwei,dingeliang,danweizhi,danweiming,jixiebianhao,ercixuanze,\demingcheng,shuoming1,shuoming2,shuoming3,shiyongfanwei,gongzuoneirong,danjia,xianjia,jiacha,weijijia,heji) values (%1,'%2',%3,'%4','%5','%6',%7,%8,'%9',%10,%11,'%12','%13','%14','%15','%16','%17',%18,%19,%20,%21,%22)")
+                        .arg(list.at(0).toInt())
+                        .arg(list.at(1))
+                        .arg(list.at(2).toInt())
+                        .arg(list.at(3))
+                        .arg(list.at(4))
+                        .arg(list.at(5))
+                        .arg(list.at(6).toDouble())
+                        .arg(list.at(7).toInt())
+                        .arg(list.at(8))
+                        .arg(list.at(9).toInt())
+                        .arg(list.at(10).toInt())
+                        .arg(list.at(11))
+                        .arg(list.at(12))
+                        .arg(list.at(13))
+                        .arg(list.at(14))
+                        .arg(list.at(15))
+                        .arg(list.at(16))
+                        .arg(list.at(17).toDouble())
+                        .arg(list.at(18).toDouble())
+                        .arg(list.at(19).toDouble())
+                        .arg(list.at(20).toDouble())
+                        .arg(list.at(21).toDouble());
+
+                ret = query.exec(sqlLine);
+
+
+            }
+
+        }
+    }
+
+}
+//土地
+void XlsxInterface::OpenTuDiXlsx()
+{
+    QString filePath = "./BaseData土地定额.xlsx";
+    if (filePath.isEmpty())
+        return;
+    QSqlQuery query(db);
+    Document xlsx(filePath);
+    foreach (QString sheetName, xlsx.sheetNames()) {
+        Worksheet *sheet = dynamic_cast<Worksheet *>(xlsx.sheet(sheetName));
+        if (sheet) {
+
+            QXlsx::CellRange range;
+            range = sheet->dimension();
+
+            int row = range.rowCount();//行
+            int clom = range.columnCount();//列
+
+
+             qDebug()<<row<<clom<<sheetName<<endl;
+            for (int i=1; i<=row; i++) {
+
+
+                if(i==1)
+                {
+                    continue;
+                }
+                QStringList list;
+                list.clear();
+                for(int j= 1;j<=clom;j++){
+
+
+                    if (QXlsx::Cell *cell=sheet->cellAt(i, j))
+                    {
+                        //如果单元格内有数据
+                        if(cell->value().type()==QMetaType::UnknownType)
+                        {
+
+                            //未知类型
+
+                        }
+                        else
+                        {
+
+                            qDebug()<<i<<j<<cell->value();
+                            list.append(cell->value().toString());
+                            //qDebug()<<i<<j<<cell->value()<<cell->cellType()<<cell->format();
+                        }
+
+                    }
+                    else
+                    {
+                        //单元格内无数据，为空
+                         list.append("");
+                    }
+
+                }
+
+                // 添
+                bool ret = false;
+                QString sqlLine = QString("insert into TuDiDingE(id,model,dingeno,biaoshi,mingcheng,danwei,dingeliang,danweizhi,danweiming,jixiebianhao,ercixuanze,\demingcheng,shuoming1,shuoming2,shuoming3,shiyongfanwei,gongzuoneirong,danjia,xianjia,jiacha,weijijia,heji) values (%1,'%2',%3,'%4','%5','%6',%7,%8,'%9',%10,%11,'%12','%13','%14','%15','%16','%17',%18,%19,%20,%21,%22)")
+                        .arg(list.at(0).toInt())
+                        .arg(list.at(1))
+                        .arg(list.at(2).toInt())
+                        .arg(list.at(3))
+                        .arg(list.at(4))
+                        .arg(list.at(5))
+                        .arg(list.at(6).toDouble())
+                        .arg(list.at(7).toInt())
+                        .arg(list.at(8))
+                        .arg(list.at(9).toInt())
+                        .arg(list.at(10).toInt())
+                        .arg(list.at(11))
+                        .arg(list.at(12))
+                        .arg(list.at(13))
+                        .arg(list.at(14))
+                        .arg(list.at(15))
+                        .arg(list.at(16))
+                        .arg(list.at(17).toDouble())
+                        .arg(list.at(18).toDouble())
+                        .arg(list.at(19).toDouble())
+                        .arg(list.at(20).toDouble())
+                        .arg(list.at(21).toDouble());
                 ret = query.exec(sqlLine);
 
 
@@ -368,7 +586,7 @@ void XlsxInterface::OpenXlsx()
 void XlsxInterface::InitDataBase()
 {
     // 数据记录
-    QString FilePathName = "C:/DataBase.db";
+    QString FilePathName = "./DataBase.db";
     db = QSqlDatabase::addDatabase("QSQLITE","DataBase");
     db.setDatabaseName(FilePathName);
     if (db.open())

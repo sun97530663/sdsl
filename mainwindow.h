@@ -48,9 +48,17 @@ public
     //材料价格编辑槽函数
     void onMaterialPriceSet();
 
+    //返回起始界面
+    void onBackStart();
+    //更新项目总览表
+    void UpdateProjectAll(QStringList projectindex,QStringList projectname,QStringList projectsum);
 private slots:
     void on_pushButton_clicked();
 
+
+    signals:
+
+    void backstart();
 private:
     Ui::MainWindow *ui;
 
